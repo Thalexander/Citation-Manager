@@ -1,0 +1,15 @@
+{% extends "citations/base.html" %}
+
+{% block content %}
+
+  <p>Citations</p>
+
+  <ul>
+    {% for citation in citations %}
+      <li>{{ citation }}</li>
+    {% empty %}
+      <li>No citations have been added yet</li>
+    {% endfor %}
+  </ul>
+
+{% endblock content %}
