@@ -10,4 +10,7 @@ urlpatterns = [
 
     # Show all citations
     url(r'^citations/$', views.citations, name='citations'),
+
+    # page for adding new citations
+    url(r'^new_citation/$', views.new_citation, name='new_citation'),
 ]

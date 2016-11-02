@@ -8,7 +8,7 @@ class Citation(models.Model):
 
     def __str__(self):
         """Return a string representation of the model."""
-        if len(title) > 50:
+        if len(self.title) > 50:
             return self.title[:50] + "..."
         else:
             return self.title
