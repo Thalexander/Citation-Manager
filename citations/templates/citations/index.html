@@ -1,6 +1,14 @@
 {% extends "citations/base.html" %}
 
+{% block header %}
+  <div class="jumbotron">
+    <h1>Keep track of citations.</h1>
+  </div>
+{% endblock header %}
+
 {% block content %}
-  <p>Citation Manager helps you keep track of citations for your projects,
-     including titles, urls and notes</p>
+  <h2>
+    <a href="{% url 'users:register' %}">Register an account</a> to keep
+    track of citations for a project, including title, link and notes.
+  </h2>
 {% endblock content %}
