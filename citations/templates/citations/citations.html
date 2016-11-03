@@ -1,22 +1,31 @@
 {% extends "citations/base.html" %}
 
+{% block header %}
+  <h1>Citations</h1>
+{% endblock header %}
+
 {% block content %}
 
-  <p>Citations</p>
+  {% for citation in citations %}
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3>
+          {{ citation.title }}
+          <small>
+            <a href="{% url 'citations:edit_citation'  citation.id %}">
+              Edit entry</a>
+          </small>
+        </h3>
+      </div>
+      <div class="panel-body">
+        <a href="{{ citation.link }}">{{citation.link }}</a>:
+        {{ citation.note }}
+      </div>
+    </div>
+  {% empty %}
+    You have no citations
+  {% endfor %}
 
-  <ul>
-    {% for citation in citations %}
-      <li>
-        <p>{{ citation }}</p>
-        <p>
-          <a href="{% url 'citations:edit_citation' citation.id %}">Edit</a>
-        </p>
-      </li>
-    {% empty %}
-      <li>No citations have been added yet</li>
-    {% endfor %}
-  </ul>
-
-  <a href="{% url 'citations:new_citation' %}">Add a new citation</a>
+  <h3><a href="{% url 'citations:new_citation' %}">Add a new citation</a></h3>
 
 {% endblock content %}
