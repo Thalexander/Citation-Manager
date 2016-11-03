@@ -1,0 +1,22 @@
+{% extends "citations/base.html" %}
+
+{% block content %}
+
+  <p>Citations</p>
+
+  <ul>
+    {% for citation in citations %}
+      <li>
+        <p>{{ citation }}</p>
+        <p>
+          <a href="{% url 'citations:edit_citation' citation.id %}">Edit</a>
+        </p>
+      </li>
+    {% empty %}
+      <li>No citations have been added yet</li>
+    {% endfor %}
+  </ul>
+
+  <a href="{% url 'citations:new_citation' %}">Add a new citation</a>
+
+{% endblock content %}
