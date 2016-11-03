@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, Http404
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 
@@ -13,7 +13,7 @@ def index(request):
 @login_required
 def citations(request):
     """Show all citations."""
-    citations = Citation.objects.all()
+    citations = Citation.objects.filter(owner=request.user)
     context = {'citations': citations}
     return render(request, 'citations/citations.html', context)
 
@@ -27,7 +27,9 @@ def new_citation(request):
         # POST data submitted; process data.
         form = CitationForm(request.POST)
         if form.is_valid():
-            form.save()
+            new_citation = form.save(commit=False)
+            new_citation.owner = request.user
+            new_citation.save()
             return HttpResponseRedirect(reverse('citations:citations'))
 
     context = {'form': form}
@@ -37,6 +39,8 @@ def new_citation(request):
 def edit_citation(request, citation_id):
     """Edit an existing citation."""
     citation = Citation.objects.get(id=citation_id)
+    if citation.owner != request.user:
+        raise Http404
 
     if request.method != 'POST':
         # Initial request; pre-fill form with current entry.
