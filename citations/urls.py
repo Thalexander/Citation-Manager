@@ -13,4 +13,8 @@ urlpatterns = [
 
     # page for adding new citations
     url(r'^new_citation/$', views.new_citation, name='new_citation'),
+
+    # Page for editing a citation
+    url(r'^edit_citation/(?P<citation_id>\d+)/$', views.edit_citation,
+        name='edit_citation'),
 ]

@@ -6,7 +6,12 @@
 
   <ul>
     {% for citation in citations %}
-      <li>{{ citation }}</li>
+      <li>
+        <p>{{ citation }}</p>
+        <p>
+          <a href="{% url 'citations:edit_citation' citation.id %}">Edit</a>
+        </p>
+      </li>
     {% empty %}
       <li>No citations have been added yet</li>
     {% endfor %}
