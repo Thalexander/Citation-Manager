@@ -1,0 +1,12 @@
+{% extends "citations/base.html" %}
+
+{% block content %}
+  <p>Add a new citation:</p>
+
+  <form action="{% url 'citations:new_citation' %}" method='post'>
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button name="submit">Add citation</button>
+  </form>
+
+{% endblock content %}
